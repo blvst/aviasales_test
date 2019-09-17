@@ -16,11 +16,19 @@ export const filteredTickets = createSelector(
       return tickets;
     }
 
-   return tickets.filter((ticket, index) => {
-      const there = checkedFilters.some(filter => segments[index][0] === filter);
-      if (!there) return false;
-
-      return checkedFilters.some(filter => segments[index][1] === filter);
+    return tickets.filter((_, index) => {
+      /*
+      * Проходимся по сегментам
+      * Для каждого сегмента проверяем есть ли такое число
+      * в списке искомых фильтров.
+      * Получаем массив из двух элементов, если один из которых false
+      * то этот тикет нам не подходит
+      */
+      return !(
+        segments[index].map((steps) => (
+          checkedFilters.some(filter => filter === steps)
+        )).some(item => item === false)
+      );
     });
   },
 );
@@ -32,7 +40,7 @@ export const sortedFilteredTickets = createSelector(
     getActiveSort,
   ],
   (tickets, activeSort) => {
-    return tickets.sort((a, b) => {
+    return [...tickets].sort((a, b) => {
       if (activeSort === 1) {
         return a.price - b.price;
       }
