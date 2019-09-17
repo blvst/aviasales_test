@@ -93,8 +93,8 @@ const ticketsGetter = (state) => {
         return a.price - b.price;
       }
 
-      const aDuration = a.segments.reduce((acc, current) => { return acc + current }, 0);
-      const bDuration = b.segments.reduce((acc, current) => { return acc + current }, 0);
+      const aDuration = a.segments.reduce((acc, current) => { return acc + current.duration }, 0);
+      const bDuration = b.segments.reduce((acc, current) => { return acc + current.duration }, 0);
 
       return aDuration - bDuration;
     }).slice(0, 5);
