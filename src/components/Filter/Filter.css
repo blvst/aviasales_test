@@ -1,0 +1,33 @@
+.filter__title {
+  margin: 0;
+  padding: var(--default-padding) var(--default-padding) calc(var(--default-padding) / 2);
+  font-weight: var(--semibold);
+  font-size: 12px;
+  line-height: 12px;
+
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-bottom: 10px;
+}
+
+.filter-list__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--default-padding) / 2) var(--default-padding);
+  cursor: pointer;
+}
+
+.filter-list__item:hover {
+  background-color: #F1FCFF;
+}

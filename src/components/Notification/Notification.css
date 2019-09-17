@@ -1,0 +1,27 @@
+.notification {
+  width: 400px;
+  padding: var(--default-padding);
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  font-size: 14px;
+  line-height: 20px;
+
+  background-color: #fff;
+  border-color: #A0B0B9;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translate(-50%, 50px);
+  opacity: 0;
+  transition: tranform 280ms ease-out, opacity 280ms ease-out;
+}
+
+.notification__is-active {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.notification__error {
+  background-color: #ff6663;
+  color: #fff;
+}
