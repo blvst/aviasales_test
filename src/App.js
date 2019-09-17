@@ -3,16 +3,16 @@ import logo from './logo.svg';
 import Filter from './components/Filter/Filter';
 import Tabs from './components/Tabs/Tabs';
 import Ticket from './components/Ticket/Ticket';
+import Notification from './components/Notification/Notification';
 
 import './variables.css';
 import './App.css';
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { changeFilter } from "./actions/filters";
-import { changeSorting } from "./actions/sort";
-import { initSearch, getTickets } from "./actions/search";
-import Notification from "./components/Notification/Notification";
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { changeFilter } from './actions/filters';
+import { changeSorting } from './actions/sort';
+import { initSearch, getTickets } from './actions/search';
+import { sortedFilteredTickets } from './selectors/Tickets';
 
 function App(props) {
   const {
@@ -21,10 +21,11 @@ function App(props) {
     activeSort,
     tabsList,
     filtersList,
-    changeSorting,
-    changeFilter,
+
     initSearch,
     getTickets,
+    changeSorting,
+    changeFilter,
   } = props;
 
 
@@ -64,53 +65,17 @@ function App(props) {
   );
 }
 
-
-const filterTickets = (state) => {
-  const tickets = [...state.tickets];
-  const segments = [...state.segments];
-
-  let filters = state.filtersList.filter(filter => filter.value);
-  if (filters.length === 0 || filters.length === state.filtersList.length) {
-    return tickets;
-  }
-
-  filters = filters.map(item => item.id);
-
-  return tickets.filter((ticket, index) => {
-    const there = filters.some(filter => segments[index][0] === filter);
-    if (!there) return false;
-
-    return filters.some(filter => segments[index][1] === filter);
-  });
-};
-
-const ticketsGetter = (state) => {
-  const tickets = filterTickets(state);
-
-  return tickets
-    .sort((a, b) => {
-      if (state.activeSort === 1) {
-        return a.price - b.price;
-      }
-
-      const aDuration = a.segments.reduce((acc, current) => { return acc + current.duration }, 0);
-      const bDuration = b.segments.reduce((acc, current) => { return acc + current.duration }, 0);
-
-      return aDuration - bDuration;
-    }).slice(0, 5);
-};
-
-const putStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     searchIsFailed: state.searchFailed,
     activeSort: state.activeSort,
     filtersList: state.filtersList,
     tabsList: state.tabsList,
-    tickets: ticketsGetter(state),
+    tickets: sortedFilteredTickets(state),
   }
 };
 
-const putActionsToProps = (dispatch) => {
+const mapActionsToProps = (dispatch) => {
   return {
     changeSorting: bindActionCreators(changeSorting, dispatch),
     changeFilter: bindActionCreators(changeFilter, dispatch),
@@ -119,4 +84,4 @@ const putActionsToProps = (dispatch) => {
   }
 };
 
-export default connect(putStateToProps, putActionsToProps)(App);
+export default connect(mapStateToProps, mapActionsToProps)(App);
