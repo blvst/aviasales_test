@@ -1,11 +1,10 @@
 import React from 'react';
 import Card from '../Card/Card';
+import FilterList from './FilterList';
 
 import FilterPropTypes from './FilterPropTypes'
 
 import './Filter.css';
-
-import FilterList from "./FilterList";
 
 function Filter(props) {
   return (

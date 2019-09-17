@@ -1,6 +1,6 @@
 import React from 'react';
-import FilterPropTypes from "./FilterPropTypes";
-import Checkbox from "../Checkbox/Checkbox";
+import FilterPropTypes from './FilterPropTypes';
+import Checkbox from '../Checkbox/Checkbox';
 
 function FilterList(props) {
   const handleClick = (evt, elem) => {

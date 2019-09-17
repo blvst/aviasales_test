@@ -5,7 +5,7 @@ import {
   CHANGE_SORTING,
   SET_SEARCH_FAILED,
   UPDATE_TICKETS
-} from "../constants/actions";
+} from '../constants/actions';
 
 const initialState = {
   failedAttempts: 0,

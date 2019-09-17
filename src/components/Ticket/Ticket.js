@@ -66,7 +66,4 @@ function Ticket(props) {
   );
 }
 
-Ticket.propTypes = {
-};
-
 export default Ticket;

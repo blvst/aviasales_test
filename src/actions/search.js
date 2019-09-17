@@ -4,30 +4,29 @@ import {
   CHANGE_FAILED_ATTEMPTS,
   SET_SEARCH_FAILED,
   UPDATE_TICKETS,
-} from "../constants/actions";
+} from '../constants/actions';
 
-
-function changeSearchId(payload) {
+const changeSearchId = (payload) => {
   return {
     type: CHANGE_SEARCH_ID,
     payload,
-  }
-}
+  };
+};
 
-function changeFailedAttempts(payload) {
+const changeFailedAttempts = (payload) => {
   return {
     type: CHANGE_FAILED_ATTEMPTS,
     payload,
-  }
-}
+  };
+};
 
-function setSearchFailed() {
+const setSearchFailed = () => {
   return {
     type: SET_SEARCH_FAILED,
-  }
-}
+  };
+};
 
-function updateTickets(tickets) {
+const updateTickets = (tickets) => {
   const segments = [];
   tickets.forEach((ticket, index) => {
     segments[index] = ticket.segments
@@ -40,8 +39,8 @@ function updateTickets(tickets) {
       tickets,
       segments,
     },
-  }
-}
+  };
+};
 
 export const initSearch = () => dispatch => {
   return searchAPI.getSearchID()
@@ -64,9 +63,9 @@ export const getTickets = (searchId) => async (dispatch, getState) => {
       throw new Error('Ошибка сервера');
     }
 
-    return dispatch(updateTickets(response.tickets))
+    return dispatch(updateTickets(response.tickets));
   } catch(e) {
-    return dispatch(changeFailedAttempts(failedAttempts + 1))
+    return dispatch(changeFailedAttempts(failedAttempts + 1));
   } finally {
     if (!response || !response.stop) {
       setTimeout(() => {

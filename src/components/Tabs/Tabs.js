@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import ClassNames from "classnames";
+import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 
 import './Tabs.css';
 
