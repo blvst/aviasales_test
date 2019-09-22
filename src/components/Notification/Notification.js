@@ -11,7 +11,6 @@ function Notification(props) {
     'notification__is-active': props.active === true,
   });
 
-
   return (
     <div className={classNames}>
       {props.children}
@@ -25,4 +24,4 @@ Notification.ptopTypes = {
   active: PropTypes.bool,
 };
 
-export default Notification;
+export default React.memo(Notification);

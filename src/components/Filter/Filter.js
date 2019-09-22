@@ -23,4 +23,11 @@ Filter.propTypes = {
   ...FilterPropTypes,
 };
 
-export default Filter;
+function isPropsUpdated(prevProps, nextProps) {
+  const changes = prevProps.elements
+    .filter((element, index) => element.value !== nextProps.elements[index].value);
+
+  return !changes.length;
+}
+
+export default React.memo(Filter, isPropsUpdated);

@@ -15,4 +15,4 @@ Card.ptopTypes = {
   children: PropTypes.node,
 };
 
-export default Card;
+export default React.memo(Card);

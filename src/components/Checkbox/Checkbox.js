@@ -31,4 +31,8 @@ Checkbox.propTypes = {
   children: PropTypes.node,
 };
 
-export default Checkbox;
+function isPropsUpdated(prevProps, nextProps) {
+  return prevProps.value === nextProps.value;
+}
+
+export default React.memo(Checkbox, isPropsUpdated);

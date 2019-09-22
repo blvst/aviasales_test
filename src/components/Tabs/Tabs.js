@@ -40,4 +40,8 @@ Tabs.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default Tabs;
+function isPropsUpdated(prevProps, nextProps) {
+  return prevProps.value === nextProps.value;
+}
+
+export default React.memo(Tabs, isPropsUpdated);
