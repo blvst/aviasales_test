@@ -52,7 +52,6 @@ const initialState = {
     },
   ],
   tickets: [],
-  segments: [],
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -100,7 +99,6 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         tickets: action.payload.tickets,
-        segments: action.payload.segments,
       };
 
     default:

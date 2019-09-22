@@ -27,17 +27,10 @@ const setSearchFailed = () => {
 };
 
 const updateTickets = (tickets) => {
-  const segments = [];
-  tickets.forEach((ticket, index) => {
-    segments[index] = ticket.segments
-      .map((segment) => (segment.stops.length));
-  });
-
   return {
     type: UPDATE_TICKETS,
     payload: {
       tickets,
-      segments,
     },
   };
 };

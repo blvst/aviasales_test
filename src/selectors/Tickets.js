@@ -1,13 +1,12 @@
 import { createSelector } from 'reselect';
 
 export const getTickets = (state) => state.tickets;
-export const getSegments = (state) => state.segments;
 export const getFilters = (state) => state.filtersList;
 export const getActiveSort = (state) => state.activeSort;
 
 export const filteredTickets = createSelector(
-  [ getTickets, getSegments, getFilters ],
-  (tickets, segments, filters) => {
+  [ getTickets, getFilters ],
+  (tickets, filters) => {
     let checkedFilters = filters
       .filter(item => item.value)
       .map(item => item.id);
@@ -16,17 +15,17 @@ export const filteredTickets = createSelector(
       return tickets;
     }
 
-    return tickets.filter((_, index) => {
+    return tickets.filter(ticket => {
       /*
       * Проходимся по сегментам
-      * Для каждого сегмента проверяем есть ли такое число
-      * в списке искомых фильтров.
-      * Получаем массив из двух элементов, если один из которых false
+      * Для каждого сегмента проверяем сравниваем длину
+      * со списком искомых фильтров.
+      * Получаем массив из двух элементов, если хоть один из которых false
       * то этот тикет нам не подходит
       */
       return !(
-        segments[index].map((steps) => (
-          checkedFilters.some(filter => filter === steps)
+        ticket.segments.map((segment) => (
+          checkedFilters.some(filter => filter === segment.stops.length)
         )).some(item => item === false)
       );
     });
