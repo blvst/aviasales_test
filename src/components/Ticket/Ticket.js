@@ -1,7 +1,9 @@
 import React from 'react';
 import Card from '../Card/Card';
-import TicketFlyingTime from './TicketFlyingTime';
-import TicketFlyingRange from './TicketTimeRange';
+import TicketPropTypes from './TicketPropTypes';
+
+import FormatFlyingDuration from '../../utils/FormatFlyingDuration';
+import FormatFlyingTimeRange from '../../utils/FormatFlyingTimeRange';
 
 import './Ticket.css';
 
@@ -39,7 +41,7 @@ function Ticket(props) {
                   {segment.origin} – {segment.destination}
                 </span>
                 <span className="ticket-cell__content">
-                  <TicketFlyingRange date={segment.date} duration={segment.duration} />
+                  {FormatFlyingTimeRange(segment.date, segment.duration)}
                 </span>
               </div>
               <div className="ticket-cell">
@@ -47,7 +49,7 @@ function Ticket(props) {
                   В пути
                 </span>
                 <span className="ticket-cell__content">
-                  <TicketFlyingTime duration={segment.duration} />
+                  {FormatFlyingDuration(segment.duration)}
                 </span>
               </div>
               <div className="ticket-cell">
@@ -65,5 +67,10 @@ function Ticket(props) {
     </Card>
   );
 }
+
+Ticket.propTypes = {
+  data: TicketPropTypes,
+};
+
 
 export default Ticket;
