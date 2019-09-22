@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import Filter from './components/Filter/Filter';
 import Tabs from './components/Tabs/Tabs';
-import Ticket from './components/Ticket/Ticket';
+import TicketList from './components/TicketList/TicketList';
 import Notification from './components/Notification/Notification';
 
 import './variables.css';
@@ -28,16 +28,10 @@ function App(props) {
     changeFilter,
   } = props;
 
-
-  const handleChangeFilter = (evt) => {
-    changeFilter(evt);
-  };
-
-
   useEffect(() => {
     initSearch()
       .then((action) => getTickets(action.payload.searchId));
-  }, []);
+  }, [getTickets, initSearch]);
 
   return (
     <div className="app">
@@ -48,13 +42,11 @@ function App(props) {
 
         <main className="app__inner">
           <aside className="app__widgets">
-            <Filter elements={filtersList} onChange={(evt) => handleChangeFilter(evt)} />
+            <Filter elements={filtersList} onChange={(evt) => changeFilter(evt)} />
           </aside>
           <div className="app__content">
             <Tabs elements={tabsList} value={activeSort} onChange={(evt) => changeSorting(evt)} />
-            {tickets.map((ticket, index) => (
-              <Ticket data={ticket} key={index} />
-            ))}
+            <TicketList tickets={tickets} />
           </div>
         </main>
         <Notification active={searchIsFailed} color="error">
